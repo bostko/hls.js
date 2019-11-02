@@ -4,36 +4,32 @@
     <title>Hls.js demo - basic usage</title>
   </head>
 
+  <style type="text/css">
+    div.container {
+      display: flex;
+    }
+    div.cell {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      flex: 1;
+      padding: 1rem;
+    }
+  </style>
+
   <body>
-      <script src="../dist/hls.js"></script>
+      <script src="simple-demo.js"></script>
+      <h2>Let's Play!</h2>
 
-      <center>
-          <h1>Hls.js demo - basic usage</h1>
-          <video height="600" id="video" controls></video>
-      </center>
+      <button type="button" name="Play" onclick="playAll()">Play!</button>
 
-      <script>
-        if(Hls.isSupported()) {
-          var video = document.getElementById('video');
-          var hls = new Hls();
-          hls.loadSource('https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8');
-          hls.attachMedia(video);
-          hls.on(Hls.Events.MANIFEST_PARSED,function() {
-            video.play();
-        });
-       }
-       // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
-       // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element throught the `src` property.
-       // This is using the built-in support of the plain video element, without using hls.js.
-        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          video.src = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
-          video.addEventListener('canplay',function() {
-            video.play();
-          });
-        }
-      </script>
+      <div class="container">
+        <iframe id="left_iframe" class="cell" width="50%" height="400" src="iframe.html">
+        </iframe>
+        <iframe id="right_iframe" class="cell" width="50%" height="400" src="iframe.html">
+        </iframe>
+      </div>
 
   </body>
 </html>
-
-

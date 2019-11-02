@@ -165,7 +165,7 @@ export type HlsConfig =
 // It is cloned whenever a new Hls instance is created, by keeping the config
 // shallow the properties are cloned, and we don't end up manipulating the default
 export const hlsDefaultConfig: HlsConfig = {
-  autoStartLoad: true, // used by stream-controller
+  autoStartLoad: false, // used by stream-controller
   startPosition: -1, // used by stream-controller
   defaultAudioCodec: void 0, // used by stream-controller
   debug: false, // used by logger
