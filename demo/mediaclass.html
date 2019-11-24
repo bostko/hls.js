@@ -1,0 +1,52 @@
+<html>
+<head>
+  <title>Videos Showcase</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<div>
+  <strong>Video1</strong>
+  <p></p>
+<video id="video1"></video>
+<script>
+    var video1 = document.getElementById('video1');
+    if (Hls.isSupported()) {
+      var hls = new Hls();
+      // bind them together
+      hls.attachMedia(video1);
+      // MEDIA_ATTACHED event is fired by hls object once MediaSource is ready
+      hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+        console.log("video1 and hls.js are now bound together !");
+
+        hls.loadSource("http://localhost:8090/playlist?channel=1c&group=1");
+        hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+          console.log("video1 manifest loaded, found " + data.levels.length + " quality level");
+          video1.play();
+        });
+      });
+    }
+  </script>
+</div>
+<p></p>
+<!--<div>
+  <strong>Video2</strong>
+<video id="video2"></video>
+<script>
+    var video2 = document.getElementById('video2');
+    if (Hls.isSupported()) {
+      var hls = new Hls();
+      // bind them together
+      hls.attachMedia(video2);
+      // MEDIA_ATTACHED event is fired by hls object once MediaSource is ready
+      hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+        console.log("video2 and hls.js are now bound together !");
+
+        hls.loadSource("http://localhost:8090/playlist?channel=1c&group=2");
+        hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+          console.log("video2 manifest loaded, found " + data.levels.length + " quality level");
+          video2.play();
+        });
+      });
+    }
+  </script>
+</div>-->
+</html>
